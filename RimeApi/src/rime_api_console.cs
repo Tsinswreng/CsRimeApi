@@ -168,7 +168,7 @@ unsafe class RimeApiConsole {
 			}
 			var len_current = 100;
 			var current = stackalloc byte[len_current];
-			if(rime.get_current_schema(session_id, current, (u64)len_current) != RimeUtil.False){
+			if(rime.get_current_schema(session_id, current, (nuint)len_current) != RimeUtil.False){
 				put("current schema: "+S(current)+"\n");
 			}
 			return true;
