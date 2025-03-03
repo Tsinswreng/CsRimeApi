@@ -10,4 +10,9 @@
 <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RimeApi\RimeApi.csproj" />
+	<Compile Include="../CsShared/GlobalUsing.cs" />
+  </ItemGroup>
+
 </Project>
