@@ -5,7 +5,7 @@ using Shr.Interop;
 unsafe class RimeApiConsole {
 
 	public RimeApiConsole(){
-		rimeApiPtr = RimeApiFn.rime_get_api();
+		rimeApiPtr = RimeDllFn.rime_get_api();
 		rime = new DelegateRimeApiFn(rimeApiPtr);
 	}
 

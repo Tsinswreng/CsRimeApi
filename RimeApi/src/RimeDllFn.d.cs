@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices;
 namespace Rime.Api;
 
-unsafe public partial class RimeApiFn{
+unsafe public partial class RimeDllFn{
 	public const string DllPath = "rime.dll";
 
 
