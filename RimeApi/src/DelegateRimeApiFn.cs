@@ -7,6 +7,12 @@ namespace Rime.Api;
 
 unsafe public class DelegateRimeApiFn{
 
+	/// <summary>
+	/// var rimeApi = RimeApiFn.rime_get_api();
+	/// var rime = new DelegateRimeApiFn(rimeApi);
+	/// </summary>
+	/// <param name="rime">非 所 有</param>
+
 	public DelegateRimeApiFn(RimeApi* rime){
 		setup = rime->setup.asFn<FnPtr.setup>();
 		set_notification_handler = rime->set_notification_handler.asFn<FnPtr.set_notification_handler>();

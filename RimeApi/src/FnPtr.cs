@@ -117,6 +117,20 @@ unsafe public delegate void cleanup_stale_sessions();
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate void cleanup_all_sessions();
+/// <summary>
+/// in librime/src/rime/key_event.h:
+/// (modifer is mask)
+//   bool shift() const { return (modifier_ & kShiftMask) != 0; }
+//   bool ctrl() const { return (modifier_ & kControlMask) != 0; }
+//   bool alt() const { return (modifier_ & kAltMask) != 0; }
+//   bool caps() const { return (modifier_ & kLockMask) != 0; }
+//   bool super() const { return (modifier_ & kSuperMask) != 0; }
+//   bool release() const { return (modifier_ & kReleaseMask) != 0; }
+/// </summary>
+/// <param name="session_id"></param>
+/// <param name="keycode"></param>
+/// <param name="mask"></param>
+/// <returns></returns>
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate Bool process_key(RimeSessionId session_id, int keycode, int mask);

@@ -1,8 +1,8 @@
 using System.Runtime.InteropServices;
-
+using static Shr.Interop.PtrUtil;
 namespace Rime.Api;
 
-public static class RimeUtil{
+unsafe public static class RimeUtil{
 
 	public const int False = 0;
 	public const int True = 1;
@@ -15,4 +15,6 @@ public static class RimeUtil{
 	public static int dataSize<T>(){
 		return Marshal.SizeOf<T>()-Marshal.SizeOf<int>();
 	}
+	
+
 }

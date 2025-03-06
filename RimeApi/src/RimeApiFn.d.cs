@@ -135,7 +135,10 @@ unsafe public partial class RimeApiFn{
 	#endregion Accessing candidate list
 
 
-
+	/// <summary>
+	///
+	/// </summary>
+	/// <returns>單例</returns>
 	[DllImport(DllPath,EntryPoint = nameof(rime_get_api),CallingConvention = CallingConvention.Cdecl)]
 	public static extern RimeApi* rime_get_api();
 
