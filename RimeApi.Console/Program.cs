@@ -1,2 +1,3 @@
-var rimeApiConsole = new RimeApiConsole();
+var rimeApiConsole = new RimeApiConsole(args);
 rimeApiConsole.run();
+//"D:\ENV\Rime\weasel-0.15.0\rime.dll"

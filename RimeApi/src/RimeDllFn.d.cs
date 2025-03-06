@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 namespace Rime.Api;
 
+[Obsolete("Use NativeLibrary.Load() instead")]
 unsafe public partial class RimeDllFn{
 	public const string DllPath = "rime.dll";
 

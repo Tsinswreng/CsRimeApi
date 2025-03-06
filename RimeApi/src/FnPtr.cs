@@ -1,3 +1,6 @@
+/// function definitions in the struct `RimeApi`
+
+
 /*
 var setup = Marshal.GetDelegateForFunctionPointer<setup>(rime_api.setup);
 setup(traits);
@@ -9,48 +12,6 @@ using System.Runtime.InteropServices;
 namespace Rime.Api.FnPtr;
 
 #pragma warning disable CS8981
-
-
-// [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-// unsafe public delegate Bool start_maintenance(
-// 	Bool full_check
-// );
-
-
-
-
-// [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-// unsafe public delegate void join_maintenance_thread();
-
-
-// [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-// unsafe public delegate RimeSessionId create_session();
-
-
-// [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-// unsafe public delegate Bool destroy_session(RimeSessionId session_id);
-
-
-
-
-
-// [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-// unsafe public delegate Bool simulate_key_sequence(
-// 	RimeSessionId session_id
-// 	,byte* key_sequence
-// );
-
-
-// [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-// unsafe public delegate Bool candidate_list_begin(
-// 	RimeSessionId session_id
-// 	,RimeCandidateListIterator* iterator
-// );
-
-// [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-// unsafe public delegate Bool candidate_list_next(
-// 	RimeCandidateListIterator* iterator
-// );
 
 
 

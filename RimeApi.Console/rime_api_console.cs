@@ -4,12 +4,18 @@ using Shr.Interop;
 
 unsafe class RimeApiConsole {
 
-	public RimeApiConsole(){
-		rimeApiPtr = RimeDllFn.rime_get_api();
-		rime = new DelegateRimeApiFn(rimeApiPtr);
+	public str[] args{get;set;}=[];
+
+	public RimeApiConsole(str[] args){
+		var dllPath = args[0];
+		// rimeApiPtr = RimeDllFn.rime_get_api();
+		// rime = new DelegateRimeApiFn(rimeApiPtr);
+		var rime_get_api = RimeDllLoader.loadFn_rime_get_api(dllPath);
+		rimeApiStructPtr = rime_get_api();
+		rime = new DelegateRimeApiFn(rimeApiStructPtr);
 	}
 
-	public RimeApi* rimeApiPtr{get;set;}
+	public RimeApi* rimeApiStructPtr{get;set;}
 	public DelegateRimeApiFn rime{get;set;}
 
 
@@ -174,6 +180,7 @@ unsafe class RimeApiConsole {
 	}
 
 	public int run(){
+		this.args = args;
 		var traits = new RimeTraits();
 		traits.data_size = RimeUtil.dataSize<RimeTraits>();
 		traits.app_name = "rime.cosole".cStr();
