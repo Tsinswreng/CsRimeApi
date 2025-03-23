@@ -1,6 +1,11 @@
 using System.Runtime.InteropServices;
 using Rime.Api;
 using Shr.Interop;
+#region RimeTypes
+using Bool = System.Int32;
+using size_t = System.UIntPtr;
+using RimeSessionId = System.UIntPtr;
+#endregion RimeTypes
 
 unsafe class RimeApiConsole {
 
@@ -167,7 +172,7 @@ unsafe class RimeApiConsole {
 
 	public void on_message(
 		void* context_object
-		,UIntPtr session_id
+		,RimeSessionId session_id
 		,byte* message_type
 		,byte* message_value
 	){
