@@ -23,7 +23,7 @@ dotnet publish -c Release -r <your_runtime_identifier>
 
 3.
 prepare a copy or a hard link of `rime.dll` to the folder the same as `RimeApi.Console.exe`.
-that is, put `rime.dll` at `RimeApi.Console/bin/Release/net9.0/<your_runtime_identifier>/publish`
+that is, put `rime.dll` at `RimeApi.Console/bin/Release/net10.0/<your_runtime_identifier>/publish`
 
 4.
 run the exe
