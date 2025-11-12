@@ -1,19 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<OutputType>Library</OutputType>
+		<OutputType>Exe</OutputType>
 		<TargetFramework>net10.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PublishAot>true</PublishAot>
-		<!-- <RuntimeIdentifier>win-x86</RuntimeIdentifier> -->
+		<RuntimeIdentifier>win-x86</RuntimeIdentifier>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
-
 	<ItemGroup>
-		<ProjectReference Include="../CsShared/CsShared.csproj" />
-		<PackageReference Include="Tsinswreng.CsInterop" Version="0.1.0.25463" />
+		<ProjectReference Include="../Rime.Api/Rime.Api.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Include="../TypeAlias.cs" />

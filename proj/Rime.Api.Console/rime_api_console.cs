@@ -1,10 +1,11 @@
+namespace Rime.Api.Console;
+using Tsinswreng.CsInterop;
 using System.Runtime.InteropServices;
 using Rime.Api;
-using Shr.Interop;
 #region RimeTypes
-using Bool = System.Int32;
-using size_t = System.UIntPtr;
-using RimeSessionId = System.UIntPtr;
+//using Bool = System.Int32;
+//using size_t = System.UIntPtr;
+//using RimeSessionId = System.UIntPtr;
 #endregion RimeTypes
 
 unsafe class RimeApiConsole {
@@ -24,15 +25,15 @@ unsafe class RimeApiConsole {
 	public DelegateRimeApiFn rime{get;set;}
 
 
-	public static str? S(u8* str){
-		return Shr.Interop.CStrUtil.cStrToCsStr(str);
+	public static str S(u8* str){
+		return ToolCStr.ToCsStr(str);
 	}
 	protected zero printf(u8* str){
 
 		return 0;
 	}
 
-	public zero put(params object?[] obj){
+	public zero put(params object[] obj){
 		foreach(var o in obj){
 			System.Console.Write(o);
 			System.Console.Write(" ");
@@ -89,7 +90,7 @@ unsafe class RimeApiConsole {
 			+"\n"
 		);
 		for(var i = 0; i < menu->num_candidates; i++){
-			var highlighted = (i== menu->highlighted_candidate_index);
+			var highlighted = i== menu->highlighted_candidate_index;
 			put(
 				i+1+". "
 				+S(menu->candidates[i].text)
@@ -185,11 +186,14 @@ unsafe class RimeApiConsole {
 	}
 
 	public int run(){
-		this.args = args;
+		args = args;
 		var traits = new RimeTraits();
 		traits.data_size = RimeUtil.dataSize<RimeTraits>();
-		traits.app_name = "rime.cosole".cStr();
-		traits.user_data_dir = "E:/_code/rime/my_rime/build/librime_native/bin".cStr();
+		fixed(u8* p = "rime.cosole"u8){
+			traits.app_name = p;
+		}
+
+		traits.user_data_dir = "E:/_code/rime/my_rime/build/librime_native/bin".CStr();
 		rime.setup(&traits);
 
 		rime.set_notification_handler(
@@ -212,7 +216,7 @@ unsafe class RimeApiConsole {
 
 		int mKaxLength = 99;
 		for(;;){
-			var line = Console.ReadLine()??"";
+			var line = System.Console.ReadLine()??"";
 			if(line == "exit"){
 				break;
 			}
@@ -223,7 +227,7 @@ unsafe class RimeApiConsole {
 			if(execute_special_command(line, session_id)){
 				continue;
 			}
-			if(rime.simulate_key_sequence(session_id, line.cStr())!=RimeUtil.False){
+			if(rime.simulate_key_sequence(session_id, line.CStr())!=RimeUtil.False){
 				put(session_id);
 			}else{
 				put("Error processing key sequence: "+line+"\n");

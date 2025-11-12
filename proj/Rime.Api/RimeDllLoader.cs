@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using Tsinswreng.CsInterop;
 
 namespace Rime.Api;
 
@@ -14,7 +15,7 @@ unsafe public class RimeDllLoader{
 	public static rime_get_api loadFn_rime_get_api(str dllPath){
 		var dllPtr = NativeLibrary.Load(dllPath);
 		var fnPtr = NativeLibrary.GetExport(dllPtr, nameof(rime_get_api));
-		var ans = fnPtr.asFn<rime_get_api>();
+		var ans = fnPtr.AsFn<rime_get_api>();
 		return ans;
 	}
 
