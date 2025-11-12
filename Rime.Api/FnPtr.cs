@@ -127,15 +127,18 @@ public unsafe delegate void set_option(RimeSessionId session_id, byte* option, B
 public unsafe delegate Bool get_option(RimeSessionId session_id, byte* option);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate void set_property(RimeSessionId session_id,
-											byte* prop,
-											byte* value);
+public unsafe delegate void set_property(
+	RimeSessionId session_id,
+	byte* prop,
+	byte* value
+);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate Bool get_property(RimeSessionId session_id,
-											byte* prop,
-											byte* value,
-											size_t buffer_size);
+	byte* prop,
+	byte* value,
+	size_t buffer_size
+);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate Bool get_schema_list(RimeSchemaList* schema_list);
@@ -145,8 +148,8 @@ public unsafe delegate void free_schema_list(RimeSchemaList* schema_list);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate Bool get_current_schema(RimeSessionId session_id,
-												 byte* schema_id,
-												 size_t buffer_size);
+ byte* schema_id,
+ size_t buffer_size);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate Bool select_schema(RimeSessionId session_id, byte* schema_id);
@@ -170,10 +173,12 @@ public unsafe delegate Bool config_get_int(RimeConfig* config, byte* key, int* v
 public unsafe delegate Bool config_get_double(RimeConfig* config, byte* key, double* value);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate Bool config_get_string(RimeConfig* config,
-												 byte* key,
-												 byte* value,
-												 size_t buffer_size);
+public unsafe delegate Bool config_get_string(
+	RimeConfig* config,
+	byte* key,
+	byte* value,
+	size_t buffer_size
+);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate byte* config_get_cstring(RimeConfig* config, byte* key);
@@ -182,9 +187,11 @@ public unsafe delegate byte* config_get_cstring(RimeConfig* config, byte* key);
 public unsafe delegate Bool config_update_signature(RimeConfig* config, byte* signer);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate Bool config_begin_map(RimeConfigIterator* iterator,
-											  RimeConfig* config,
-											  byte* key);
+public unsafe delegate Bool config_begin_map(
+	RimeConfigIterator* iterator,
+	RimeConfig* config,
+	byte* key
+);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate Bool config_next(RimeConfigIterator* iterator);
@@ -194,8 +201,10 @@ public unsafe delegate void config_end(RimeConfigIterator* iterator);
 
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate Bool simulate_key_sequence(RimeSessionId session_id,
-													 byte* key_sequence);
+public unsafe delegate Bool simulate_key_sequence(
+	RimeSessionId session_id,
+	byte* key_sequence
+);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate Bool register_module(RimeModule* module);
@@ -237,19 +246,25 @@ public unsafe delegate Bool config_set_int(RimeConfig* config, byte* key, int va
 public unsafe delegate Bool config_set_double(RimeConfig* config, byte* key, double value);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate Bool config_set_string(RimeConfig* config,
-												 byte* key,
-												 byte* value);
+public unsafe delegate Bool config_set_string(
+	RimeConfig* config,
+	byte* key,
+	byte* value
+);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate Bool config_get_item(RimeConfig* config,
-											   byte* key,
-											   RimeConfig* value);
+public unsafe delegate Bool config_get_item(
+	RimeConfig* config,
+	byte* key,
+	RimeConfig* value
+);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate Bool config_set_item(RimeConfig* config,
-											   byte* key,
-											   RimeConfig* value);
+public unsafe delegate Bool config_set_item(
+	RimeConfig* config,
+	byte* key,
+	RimeConfig* value
+);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate Bool config_clear(RimeConfig* config, byte* key);
@@ -264,9 +279,11 @@ public unsafe delegate Bool config_create_map(RimeConfig* config, byte* key);
 public unsafe delegate size_t config_list_size(RimeConfig* config, byte* key);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate Bool config_begin_list(RimeConfigIterator* iterator,
-												RimeConfig* config,
-												byte* key);
+public unsafe delegate Bool config_begin_list(
+	RimeConfigIterator* iterator,
+	RimeConfig* config,
+	byte* key
+);
 
 
 
@@ -286,12 +303,16 @@ public unsafe delegate byte* get_version();
 public unsafe delegate void set_caret_pos(RimeSessionId session_id, size_t caret_pos);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate Bool select_candidate_on_current_page(RimeSessionId session_id,
-                                                               size_t index);
+public unsafe delegate Bool select_candidate_on_current_page(
+	RimeSessionId session_id,
+	size_t index
+);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate Bool candidate_list_begin(RimeSessionId session_id,
-                                                    RimeCandidateListIterator* iterator);
+public unsafe delegate Bool candidate_list_begin(
+	RimeSessionId session_id,
+	RimeCandidateListIterator* iterator
+);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate Bool candidate_list_next(RimeCandidateListIterator* iterator);
@@ -303,9 +324,11 @@ public unsafe delegate void candidate_list_end(RimeCandidateListIterator* iterat
 public unsafe delegate Bool user_config_open(byte* config_id, RimeConfig* config);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate Bool candidate_list_from_index(RimeSessionId session_id,
-                                                         RimeCandidateListIterator* iterator,
-                                                         int index);
+public unsafe delegate Bool candidate_list_from_index(
+	RimeSessionId session_id,
+	RimeCandidateListIterator* iterator,
+	int index
+);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate byte* get_prebuilt_data_dir();
@@ -316,38 +339,43 @@ public unsafe delegate byte* get_staging_dir();
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate void commit_proto(
 	RimeSessionId session_id
-	,void* commit_builder//RIME_PROTO_BUILDER*
+	, void* commit_builder//RIME_PROTO_BUILDER*
 );
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate void context_proto(
 	RimeSessionId session_id
-	,void* context_builder//RIME_PROTO_BUILDER*
+	, void* context_builder//RIME_PROTO_BUILDER*
 );
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate void status_proto(
 	RimeSessionId session_id
-	,void* status_builder//RIME_PROTO_BUILDER*
+	, void* status_builder//RIME_PROTO_BUILDER*
 );
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate byte* get_state_label(RimeSessionId session_id,
-                                                byte* option_name,
-                                                Bool state);
+public unsafe delegate byte* get_state_label(
+	RimeSessionId session_id,
+	byte* option_name,
+	Bool state
+);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate Bool delete_candidate(RimeSessionId session_id, size_t index);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate Bool delete_candidate_on_current_page(RimeSessionId session_id,
-                                                                 size_t index);
+public unsafe delegate Bool delete_candidate_on_current_page(
+	RimeSessionId session_id,
+	size_t index
+);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate RimeStringSlice get_state_label_abbreviated(RimeSessionId session_id,
-                                                                      byte* option_name,
-                                                                      Bool state,
-                                                                      Bool abbreviated);
+	byte* option_name,
+	Bool state,
+	Bool abbreviated
+);
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate Bool set_input(RimeSessionId session_id, byte* input);

@@ -1,5 +1,4 @@
 using System.Runtime.InteropServices;
-using Shr.Interop;
 
 namespace Rime.Api;
 
@@ -18,7 +17,7 @@ unsafe public class RimeDllLoader{
 		var ans = fnPtr.asFn<rime_get_api>();
 		return ans;
 	}
-	
+
 	// public str dllPath{get;set;}="rime";
 
 	// public rime_get_api rime_get_api = null!;

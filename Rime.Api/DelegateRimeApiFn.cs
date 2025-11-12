@@ -1,7 +1,6 @@
 #pragma warning disable CS8981
-using System.Runtime.InteropServices;
+
 using FnPtr=Rime.Api.FnPtr;
-using Shr.Interop;
 
 namespace Rime.Api;
 
