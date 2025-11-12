@@ -13,7 +13,8 @@
 
 	<ItemGroup>
 		<ProjectReference Include="../CsShared/CsShared.csproj" />
-		<PackageReference Include="Tsinswreng.CsInterop" Version="0.1.0.25463" />
+		<ProjectReference Include="../../CsInterop/proj/Tsinswreng.CsInterop/Tsinswreng.CsInterop.csproj" />
+
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Include="../TypeAlias.cs" />

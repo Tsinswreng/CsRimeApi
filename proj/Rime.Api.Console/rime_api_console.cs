@@ -2,6 +2,9 @@ namespace Rime.Api.Console;
 using Tsinswreng.CsInterop;
 using System.Runtime.InteropServices;
 using Rime.Api;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Collections.Concurrent;
 #region RimeTypes
 //using Bool = System.Int32;
 //using size_t = System.UIntPtr;
@@ -25,7 +28,7 @@ unsafe class RimeApiConsole {
 	public DelegateRimeApiFn rime{get;set;}
 
 
-	public static str S(u8* str){
+	public static str? S(u8* str){
 		return ToolCStr.ToCsStr(str);
 	}
 	protected zero printf(u8* str){
@@ -186,14 +189,15 @@ unsafe class RimeApiConsole {
 	}
 
 	public int run(){
+		using var mgr = new PtrMgr();
 		args = args;
 		var traits = new RimeTraits();
 		traits.data_size = RimeUtil.dataSize<RimeTraits>();
-		fixed(u8* p = "rime.cosole"u8){
-			traits.app_name = p;
-		}
+		traits.app_name = mgr.Str("rime.cosole");
+		traits.user_data_dir = mgr.Str("E:/_code/rime/my_rime/build/librime_native/bin");
 
-		traits.user_data_dir = "E:/_code/rime/my_rime/build/librime_native/bin".CStr();
+
+
 		rime.setup(&traits);
 
 		rime.set_notification_handler(
@@ -240,4 +244,30 @@ unsafe class RimeApiConsole {
 		return 0;
 	}
 
+
+	// 返回 0 結尾的 u8*，生命週期跟隨程式集
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static byte* U8(string CsStr){
+		ReadOnlySpan<byte> utf8 = Encoding.UTF8.GetBytes(CsStr);
+		fixed (byte* p = utf8){
+			return p;	// 僅在當前 scope 有效
+		}
+	}
+
 }
+
+
+// 放進公共 utils 檔案，namespace 隨你
+// internal static unsafe class Utf8Lit{
+
+
+// 	// 真正可長期持有的指標：直接拿模組的 UTF8 段
+// 	public static sbyte* U8Const(string ascii){
+// 		// 利用 C# 11 的 inline array + module initializer
+// 		// 把字串丟進静态 readonly 區塊，保證全域唯一且 0 結尾
+// 		return (sbyte*)System.Runtime.CompilerServices.Unsafe.AsPointer(
+// 				ref System.Runtime.InteropServices.MemoryMarshal
+// 					.GetReference(Encoding.UTF8.GetBytes(ascii + "\0"))
+// 		);
+// 	}
+// }
