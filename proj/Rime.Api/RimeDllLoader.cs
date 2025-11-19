@@ -1,14 +1,10 @@
+namespace Rime.Api;
+
 using System.Runtime.InteropServices;
 using Tsinswreng.CsInterop;
 
-namespace Rime.Api;
-
-// [DllImport(DllPath,EntryPoint = nameof(rime_get_api),CallingConvention = CallingConvention.Cdecl)]
-// 	public static extern RimeApi* rime_get_api();
-
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate RimeApi* rime_get_api();
-
 
 unsafe public class RimeDllLoader{
 	//TODO test
@@ -18,14 +14,4 @@ unsafe public class RimeDllLoader{
 		var ans = fnPtr.AsFn<rime_get_api>();
 		return ans;
 	}
-
-	// public str dllPath{get;set;}="rime";
-
-	// public rime_get_api rime_get_api = null!;
-
-	// public RimeDllLoader(str dllPath){
-	// 	// this. dllPath = dllPath;
-	// 	// var fnPtr = NativeLibrary.Load(dllPath);
-	// 	// rime_get_api = fnPtr.asFn<rime_get_api>();//TODO test
-	// }
 }

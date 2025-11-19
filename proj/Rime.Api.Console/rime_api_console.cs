@@ -111,13 +111,13 @@ unsafe class RimeApiConsole {
 
 	public zero print(UIntPtr session_id){
 		var commit = new RimeCommit();
-		commit.data_size = RimeUtil.dataSize<RimeCommit>();
+		commit.data_size = RimeUtil.DataSize<RimeCommit>();
 
 		var status = new RimeStatus();
-		status.data_size = RimeUtil.dataSize<RimeStatus>();
+		status.data_size = RimeUtil.DataSize<RimeStatus>();
 
 		var context = new RimeContext();
-		context.data_size = RimeUtil.dataSize<RimeContext>();
+		context.data_size = RimeUtil.DataSize<RimeContext>();
 
 		if(rime.get_commit(session_id, &commit)
 			!=RimeUtil.False
@@ -192,7 +192,7 @@ unsafe class RimeApiConsole {
 		using var mgr = new PtrMgr();
 		args = args;
 		var traits = new RimeTraits();
-		traits.data_size = RimeUtil.dataSize<RimeTraits>();
+		traits.data_size = RimeUtil.DataSize<RimeTraits>();
 		traits.app_name = mgr.Str("rime.cosole");
 		traits.user_data_dir = mgr.Str("E:/_code/rime/my_rime/build/librime_native/bin");
 

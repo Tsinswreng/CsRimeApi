@@ -1,18 +1,23 @@
+#pragma warning disable CS8981
 /// function definitions in the struct `RimeApi`
+
+//#define RIME_PROTO_BUILDER void
+//using RIME_PROTO_BUILDER=System.Void;
+
+using System.Runtime.InteropServices;
+
+
+namespace Rime.Api.FnPtr{
 
 
 /*
 var setup = Marshal.GetDelegateForFunctionPointer<setup>(rime_api.setup);
 setup(traits);
  */
-//#define RIME_PROTO_BUILDER void
-//using RIME_PROTO_BUILDER=System.Void;
 
-using System.Runtime.InteropServices;
-namespace Rime.Api.FnPtr;
-
-#pragma warning disable CS8981
-
+// unsafe class A{
+// 	public delegate* unmanaged[Cdecl]<nint, nint*, nint> PyObject_CallObject;
+// }
 
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -379,3 +384,6 @@ public unsafe delegate RimeStringSlice get_state_label_abbreviated(RimeSessionId
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate Bool set_input(RimeSessionId session_id, byte* input);
+
+}//~Ns
+

@@ -13,7 +13,7 @@ unsafe public class DelegateRimeApiFn{
 	/// </summary>
 	/// <param name="rime">非 所 有</param>
 
-	public DelegateRimeApiFn(RimeApi* rime){
+	public DelegateRimeApiFn(RimeApiOld* rime){
 		setup = rime->setup.AsFn<FnPtr.setup>();
 		set_notification_handler = rime->set_notification_handler.AsFn<FnPtr.set_notification_handler>();
 		initialize = rime->initialize.AsFn<FnPtr.initialize>();

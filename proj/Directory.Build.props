@@ -1,0 +1,15 @@
+<Project>
+	<PropertyGroup>
+		<AllowMissingPrunePackageData>true</AllowMissingPrunePackageData>
+		<TargetFramework>net10.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<PublishAot>true</PublishAot>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="../TypeAlias.cs" />
+	</ItemGroup>
+</Project>
+
