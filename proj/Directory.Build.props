@@ -11,5 +11,8 @@
 	<ItemGroup>
 		<Compile Include="../TypeAlias.cs" />
 	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="../../../Tsinswreng.CsInterop/proj/Tsinswreng.CsInterop/Tsinswreng.CsInterop.csproj" />
+	</ItemGroup>
 </Project>
 

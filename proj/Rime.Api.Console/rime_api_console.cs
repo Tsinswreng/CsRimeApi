@@ -12,7 +12,31 @@ using System.Collections.Concurrent;
 #endregion RimeTypes
 
 unsafe class RimeApiConsole {
+	~RimeApiConsole(){
+		Dispose(false);
+	}
+	protected bool _Disposed = false;
+	public void Dispose() {
+		Dispose(true);
+		GC.SuppressFinalize(this);
+	}
+	protected virtual void Dispose(bool Disposing) {
+		if(_Disposed){
+			return;
+		}
+		if(Disposing){
+			// dispose managed resources
+			PtrMgr.Dispose();
+		}
+		// dispose unmanaged resources
+		NativeMemory.Free(rimeApiStructPtr);
+		_Disposed = true;
+	}
 
+
+
+
+	protected PtrMgr PtrMgr = new();
 	public str[] args{get;set;}=[];
 
 	public RimeApiConsole(str[] args){
@@ -21,15 +45,16 @@ unsafe class RimeApiConsole {
 		// rime = new DelegateRimeApiFn(rimeApiPtr);
 		var rime_get_api = RimeDllLoader.loadFn_rime_get_api(dllPath);
 		rimeApiStructPtr = rime_get_api();
-		rime = new DelegateRimeApiFn(rimeApiStructPtr);
+		rime = *rimeApiStructPtr;
 	}
 
 	public RimeApi* rimeApiStructPtr{get;set;}
-	public DelegateRimeApiFn rime{get;set;}
+	public RimeApi rime{get;set;}
 
 
-	public static str? S(u8* str){
-		return ToolCStr.ToCsStr(str);
+	public str? S(u8* str){
+		var R = ToolCStr.ToCsStr(str);
+		return R;
 	}
 	protected zero printf(u8* str){
 
@@ -189,17 +214,14 @@ unsafe class RimeApiConsole {
 	}
 
 	public int run(){
-		using var mgr = new PtrMgr();
+		var mgr = PtrMgr;
 		args = args;
 		var traits = new RimeTraits();
 		traits.data_size = RimeUtil.DataSize<RimeTraits>();
 		traits.app_name = mgr.Str("rime.cosole");
 		traits.user_data_dir = mgr.Str("E:/_code/rime/my_rime/build/librime_native/bin");
 
-
-
 		rime.setup(&traits);
-
 		rime.set_notification_handler(
 			on_message
 			,null
@@ -243,31 +265,4 @@ unsafe class RimeApiConsole {
 
 		return 0;
 	}
-
-
-	// 返回 0 結尾的 u8*，生命週期跟隨程式集
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static byte* U8(string CsStr){
-		ReadOnlySpan<byte> utf8 = Encoding.UTF8.GetBytes(CsStr);
-		fixed (byte* p = utf8){
-			return p;	// 僅在當前 scope 有效
-		}
-	}
-
 }
-
-
-// 放進公共 utils 檔案，namespace 隨你
-// internal static unsafe class Utf8Lit{
-
-
-// 	// 真正可長期持有的指標：直接拿模組的 UTF8 段
-// 	public static sbyte* U8Const(string ascii){
-// 		// 利用 C# 11 的 inline array + module initializer
-// 		// 把字串丟進静态 readonly 區塊，保證全域唯一且 0 結尾
-// 		return (sbyte*)System.Runtime.CompilerServices.Unsafe.AsPointer(
-// 				ref System.Runtime.InteropServices.MemoryMarshal
-// 					.GetReference(Encoding.UTF8.GetBytes(ascii + "\0"))
-// 		);
-// 	}
-// }

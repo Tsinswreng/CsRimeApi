@@ -3,6 +3,7 @@ namespace Rime.Api;
 using System.Runtime.InteropServices;
 using Tsinswreng.CsInterop;
 
+//懶得寫 delegate* unmanaged 了
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate RimeApi* rime_get_api();
 
