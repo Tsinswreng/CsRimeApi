@@ -5,6 +5,7 @@ using Rime.Api;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Collections.Concurrent;
+using Rime.Api.Types;
 #region RimeTypes
 //using Bool = System.Int32;
 //using size_t = System.UIntPtr;
@@ -156,13 +157,13 @@ unsafe class RimeApiConsole {
 		}
 
 		if(rime.get_status(session_id, &status)
-			!=RimeUtil.False
+			!=Bool.False
 		){
 			print_status(&status);
 			rime.free_status(&status);
 		}
 		if(rime.get_context(session_id, &context)
-			!=RimeUtil.False
+			!=Bool.False
 		){
 			print_context(&context);
 			rime.free_context(&context);
@@ -222,8 +223,9 @@ unsafe class RimeApiConsole {
 		traits.user_data_dir = mgr.Str("E:/_code/rime/my_rime/build/librime_native/bin");
 
 		rime.setup(&traits);
+		RimeNotificationHandler fn = on_message;
 		rime.set_notification_handler(
-			on_message
+			(fn).ToFnPtr()
 			,null
 		);
 		put("init...\n");

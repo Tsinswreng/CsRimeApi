@@ -1,5 +1,6 @@
 using System.Runtime.InteropServices;
-
+using Rime.Api.Types;
+using Tsinswreng.CsInterop;
 namespace Rime.Api;
 
 /// <summary>
@@ -9,7 +10,7 @@ namespace Rime.Api;
 unsafe public struct RimeApi{
 	public int data_size;
 
-	#region  setup
+	#region setup
 	/// <summary>
 	/// Call this function before accessing any other API functions.
 	/// </summary>
@@ -36,10 +37,31 @@ unsafe public struct RimeApi{
    *  when handler is NULL, notification is disabled.
    */
 	public delegate* unmanaged[Cdecl]<
-		RimeNotificationHandler // handler
-		, void* // context_object
+		delegate* unmanaged[Cdecl]<
+			void* // context_object
+			,RimeSessionId // session_id
+			,u8* //message_type // const char*
+			,u8* //message_value // const char*
+			,void
+		> // handler
+		,void* // context_object
 		,void
 	> set_notification_handler;
+
+#if false
+	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+	unsafe public delegate void RimeNotificationHandler(
+		void* context_object
+		,RimeSessionId session_id
+		,byte* message_type // const char*
+		,byte* message_value // const char*
+	);
+	public delegate* unmanaged[Cdecl]<
+		RimeNotificationHandler // handler
+		,void* // context_object
+		,void
+	> set_notification_handler;
+#endif
 
 	#endregion setup
 
@@ -556,4 +578,37 @@ unsafe public struct RimeApi{
 		,Bool
 	> set_input;
 
+}
+
+
+unsafe public static class ExtnRimeApi{
+	extension(RimeApi z){
+		public static delegate* unmanaged[Cdecl]<
+			void* // context_object
+			,RimeSessionId // session_id
+			,u8* //message_type // const char*
+			,u8* //message_value // const char*
+			,void
+		> ToRimeNotificationHandlerFnPtr(IntPtr ptr){
+			return (delegate* unmanaged[Cdecl]<
+				void* // context_object
+				,RimeSessionId // session_id
+				,u8* //message_type // const char*
+				,u8* //message_value // const char*
+				,void
+			>)ptr;
+		}
+	}
+
+	extension(RimeApi z){
+		public void set_notification_handlerManaged(
+			RimeNotificationHandler handler
+			,void* context_object
+		){
+			z.set_notification_handler(
+				ToRimeNotificationHandlerFnPtr(Marshal.GetFunctionPointerForDelegate(handler))
+				, context_object
+			);
+		}
+	}
 }

@@ -5,6 +5,8 @@
 //using RIME_PROTO_BUILDER=System.Void;
 
 using System.Runtime.InteropServices;
+using Rime.Api.Types;
+using Tsinswreng.CsInterop;
 
 
 namespace Rime.Api.FnPtr{

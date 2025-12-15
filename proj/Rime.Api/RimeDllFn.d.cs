@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using Rime.Api.Types;
 namespace Rime.Api;
 
 [Obsolete("Use NativeLibrary.Load() instead")]

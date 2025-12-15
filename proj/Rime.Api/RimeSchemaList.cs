@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using Tsinswreng.CsInterop;
 
 namespace Rime.Api;
 
